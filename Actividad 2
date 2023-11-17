@@ -1,0 +1,82 @@
+import java.util.Scanner;
+//Awuí se indica la clase
+
+class Bus {
+    private String nombre;
+    private String[] paradas;
+    private boolean funcionaEnFeriados;
+
+    public Bus(String nombre, String[] paradas, boolean funcionaEnFeriados) {
+        this.nombre = nombre;
+        this.paradas = paradas;
+        this.funcionaEnFeriados = funcionaEnFeriados;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String[] getParadas() {
+        return paradas;
+    }
+
+    public boolean funcionaEnFeriados() {
+        return funcionaEnFeriados;
+    }
+}
+// En esta sección se ingresa las rutas de los buses
+public class Main {
+    public static void main(String[] args) {
+        
+        Bus bus1 = new Bus("G18", new String[]{"Estación Yomasa", "Estación Aurora", "Estación Caicedo"}, true);
+        Bus bus2 = new Bus("H21", new String[]{"Estación Centro", "Estación Toledo", "Estación Salitre"}, false);
+
+        
+
+        //Estructura del menú
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("Menú:");
+            System.out.println("1. Consultar paradas de una ruta de bus");
+            System.out.println("2. Consultar rutas de bus que funcionan en dias festivos");
+            
+
+            System.out.print("Seleccione una opción: ");
+            int opcion = scanner.nextInt();
+            scanner.nextLine(); 
+
+/// en esta sección se evalúa el ciclo mediante if´s y else´s
+            switch (opcion) {
+                case 1:
+                    System.out.print("Ingrese la ruta de bus: ");
+                    String rutaBus = scanner.nextLine();
+
+                    Bus bus = rutasDeBuses.get(rutaBus);
+
+                    if (bus != null) {
+                        System.out.println("Paradas de la ruta " + rutaBus + ":");
+                        for (String parada : bus.getParadas()) {
+                            System.out.println(parada);
+                        }
+                    } else {
+                        System.out.println("Esta ruta no existe.");
+                    }
+                    break;
+                case 2:
+                    System.out.println("Rutas de bus que funcionan en dias festivos:");
+                    for (Bus ruta : rutasDeBuses.values()) {
+                        if (ruta.funcionaEnFeriados()) {
+                            System.out.println(ruta.getNombre());
+                        }
+                    }
+                    break;
+                case 3:
+                    System.out.println("Gracias por usar el servicio");
+                    System.exit(0);
+                default:
+                    System.out.println("Opción no válida. Intente de nuevo.");
+            }
+        }
+    }
+}
