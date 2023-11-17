@@ -1,0 +1,92 @@
+include <stdio.h>;
+include <string.h>;
+
+// Aquí se hace la estructura usuario y se declaran variables
+struct Usuario {
+    char nombre[60];
+    char rol;
+    float notas[5]; 
+};
+
+// Aqui el estudiante ingresa lo que necesita
+void accionesProfesor(struct Usuario *profesor) {
+    printf("Hola, soy el profesor %s. ¿En qué puedo ayudarte?\n", profesor->nombre);
+    
+}
+
+// Este es el menú donde el estudiante realiza la consulta
+void accionesEstudiante(struct Usuario *estudiante) {
+    printf("A. Consultar notas\n");
+    printf("B. Conocer promedio de notas\n");
+
+// Aquí se declaran variables como "char"
+    char opcion;
+    scanf(" %c", &opcion);
+
+// Aquí se evalúa mediante la función switch y los ciclos for
+    switch(opcion) {
+        case 'A':
+        case 'a':
+            printf("Notas de %s:\n", estudiante->nombre);
+            for (int i = 0; i < 5; ++i) {
+                printf("Nota %d: %.2f\n", i + 1, estudiante->notas[i]);
+            }
+            break;
+        case 'B':
+        case 'b':
+            {
+                float promedio = 0;
+                for (int i = 0; i < 5; ++i) {
+                    promedio += estudiante->notas[i];
+                }
+                promedio /= 5;
+                printf("Promedio de notas de %s: %.2f\n", estudiante->nombre, promedio);
+            }
+            break;
+//Aquí se define si no cumple ninguna de las anteriores opciones del menú anterior
+        default:
+            printf("Opción no válida.\n");
+    }
+}
+
+int main() {
+    // Crear un profesor
+    struct Usuario profesor;
+    strcpy(profesor.nombre, "Carlos soler");
+    profesor.rol = 'Pr';
+
+    // Crear tres estudiantes con notas
+    struct Usuario estudiantes[3];
+    strcpy(estudiantes[0].nombre, "Andrés cadavid");
+    estudiantes[0].rol = 'E';
+    estudiantes[0].notas[0] = 85.5;
+    estudiantes[0].notas[1] = 90.0;
+    estudiantes[0].notas[2] = 78.5;
+    estudiantes[0].notas[3] = 92.0;
+    estudiantes[0].notas[4] = 88.5;
+
+    strcpy(estudiantes[1].nombre, "David castro");
+    estudiantes[1].rol = 'E';
+    estudiantes[1].notas[0] = 76.0;
+    estudiantes[1].notas[1] = 88.5;
+    estudiantes[1].notas[2] = 90.5;
+    estudiantes[1].notas[3] = 82.0;
+    estudiantes[1].notas[4] = 79.5;
+
+    strcpy(estudiantes[2].nombre, "Johan huerfano");
+    estudiantes[2].rol = 'E';
+    estudiantes[2].notas[0] = 92.0;
+    estudiantes[2].notas[1] = 85.0;
+    estudiantes[2].notas[2] = 88.5;
+    estudiantes[2].notas[3] = 90.0;
+    estudiantes[2].notas[4] = 94.5;
+
+    // Aquí vanm las accionesw
+    accionesProfesor(&profesor);
+
+    for (int i = 0; i < 3; ++i) {
+        accionesEstudiante(&estudiantes[i]);
+    }
+
+    return 0;
+}
